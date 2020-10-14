@@ -1,11 +1,11 @@
 class Vehicles {
-    ps ="";
+    ps:number ;
     model ="";
     color="";
     fuel="";
-    NumberOfSeats="";
-    km="";
-    yearOfProduction="";
+    NumberOfSeats:number;
+    km:number;
+    yearOfProduction:number;
 
 constructor(ps, model, color, fuel, NumberOfSeats, km, yearOfProduction) {
     this.ps = ps;
@@ -19,54 +19,68 @@ constructor(ps, model, color, fuel, NumberOfSeats, km, yearOfProduction) {
 }
 
 hello(){
-  let result: number=(this.model + this.fuel)/(this.NumberOfSeats * this.ps);
- return `Unser Auto ist folgendes Model ${this.model} und hat folgende Sitzanzahl  ${this.NumberOfSeats} und hat folgenden Preis ${result}`;
-
+ return `Unser Auto ist folgendes Model ${this.model} hat die Farbe ${this.color} tankt ${this.fuel} und hat folgenden Preis ${this.calculation()} €`;
+}
+calculation(){
+return (this.ps*this.NumberOfSeats)+this.km - this.yearOfProduction
 }
 }
  
-
-console.log(result);
-
 let NewCar = new Vehicles (20, "Vw", "red", "diesel" ,  4, 200, 19);
-
 console.log(NewCar.hello());
+
+
 
 
 class Motorbikes extends Vehicles {
    name="";
     
-
-constructor(ps, model, color, fuel, NumberOfSeats, name){
-    super(ps, model, color, fuel, NumberOfSeats);
+constructor(ps,NumberOfSeats,km,yearOfProduction,name,model?,color?,fuel?){
+    super(ps, model, color, fuel, NumberOfSeats, km, yearOfProduction);
   this.name = name;
     
 }
 
 Motorbikeoutput(){
-    return `${super.hello()} And my motorbike has the name ${this.name}`;
+    return `This is the model ${this.model} and is A Motorbike, its Name: ${this.name} and costs ${this.calculation()} €`;
+}
+calculation(){
+    return (this.ps/this.NumberOfSeats)+this.km - this.yearOfProduction
 }
 };
 
-let NewBike = new Motorbikes(20, "Kavashaki", "black", "benzin", 2, "superbike");
+let NewBike = new Motorbikes(500, 2, 500, 28, "Kawasaki", "Ninja", "red", "diesel");
 
-console.log(NewBike.Motorbikeoutput());
 
 class Trucks extends Vehicles {
     size="";
 
-  constructor(ps, model, color, fuel, NumberOfSeats, size){
-      super(ps, model, color, fuel, NumberOfSeats);
+  constructor(ps,NumberOfSeats, km , yearOfProduction, size, model?, color?, fuel? ){
+      super(ps, model, color, fuel, NumberOfSeats, km, yearOfProduction,);
       this.size = size;
 }
  Trucksoutput(){
-     return `${super.hello()} and i have a ${this.size} Truck`;
+     return `This is a Truck with the size ${this.size} and costs ${this.calculation()} €`;
 }
- };
+calculation(){
+    return (this.ps*this.NumberOfSeats)-this.km + this.yearOfProduction
+    }
+
+};
      
- let NewTruck = new Trucks (250, "audi", "blue", "hybrid", "4", "big");
- console.log(NewTruck.Trucksoutput());
+ let NewTruck = new Trucks(250, 4, 200, 30, "big", "Audi", "red", "dieesel",);
 
 
+
+ document.getElementById("autobtn").addEventListener("click",function(){
+     document.getElementById("result").innerHTML=NewCar.hello();
+ })
+
+ document.getElementById("bikebtn").addEventListener("click",function(){
+    document.getElementById("result").innerHTML=NewBike.Motorbikeoutput();
+})
+document.getElementById("truckbtn").addEventListener("click",function(){
+    document.getElementById("result").innerHTML=NewTruck.Trucksoutput();
+})
 
 
